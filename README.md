@@ -1,1 +1,1 @@
-Numbers are hard. Chipotle burritors are easy. **Chipotlefy** is a currency converter that makes big numbers easy to understand by converting dollars into units of Chipotle burritos.
+Numbers are hard. Chipotle burritos are easy. **Chipotlefy** is a currency converter that makes big numbers easy to understand by converting dollars into units of Chipotle burritos.
