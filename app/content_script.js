@@ -11,6 +11,9 @@ function convertDollarsToBurritos(dollars, order) {
 }
 
 function getDollarsFromMatch(match) {
+  if (match[0] == '$') {
+    match = match.substr(1, match.length);
+  }
   dollars = parseInt(match);
   strings = ['hundred', 'thousand', 'million', 'billion', 'trillion'];
   numbers = [100, 1000, 1000000, 100000000, 1000000000000];
@@ -38,24 +41,22 @@ function priceOfChipotleOrder(order) {
   if (order['guacamole'] && order['meat'] !== 'vegitarian') {
     myPrice += 1.9;
   }
-  return myPrice
+  console.log("PRICE", myPrice);
+  return myPrice;
 }
 
-function processMatch(match) {
+function chipotlefy(match) {
   dollars = getDollarsFromMatch(match);
-  burritos = convertDollarsToBurritos(dollars, order);
-  return "<span class='chipotlefied' data-original=" + match + ">OMGOMG" + burritos + "OMGOMG</span>";
+  burritos = convertDollarsToBurritos(dollars, myOrder);
+  return "<span class='chipotlefied' data-original='" + match + "' style='background-color: papayawhip'>" + parseInt(burritos) + " burritos</span>";
 }
 
 function findAndReplace(el) {
   var re = /\$([\d,]+)(\.\d+)? ?(hundred|thousand|million|billion|trillion)?|\$?([\d,\.]+) (\w+)? ?dollars/g; 
-
   var nodes = el.childNodes;
   for (var n = 0; n < nodes.length; n++) {
-    if (nodes[n].nodeType == Node.TEXT_NODE) {
-      nodes[n].textContent = nodes[n].textContent.replace(re, processMatch);
-    } else {
-        findAndReplace(nodes[n]);
+    if (typeof nodes[n].innerHTML != 'undefined') {
+      nodes[n].innerHTML = nodes[n].innerHTML.replace(re, chipotlefy)
     }
   }
 }
